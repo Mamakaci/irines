@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { phone, phoneDisplay, practicePages } from '../../data/content';
+import { practiceImages } from '../../assets/images';
+
+export function getStaticPaths() {
+  return practicePages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const details = page.ka;
+const image = practiceImages[page.slug];
+---
+
+<BaseLayout title={`${details.title} | Irine Chutketashvili`} description={details.intro}>
+  <header class="detail-header section-shell">
+    <a class="wordmark" href="/" aria-label="Irine Chutketashvili home">
+      <span lang="ka">ირინე ჩუტკერაშვილი</span>
+      <span class="wordmark-latin">Irine Chutketashvili</span>
+    </a>
+    <div class="detail-actions">
+      <div class="language-switcher" aria-label="Language">
+        <button class="language-button is-active" type="button" data-language="ka" aria-pressed="true">ქარ</button>
+        <span aria-hidden="true">/</span>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="back-link" href="/#practice"><span aria-hidden="true">&#8592;</span><span data-copy="back">მთავარი</span></a>
+    </div>
+  </header>
+
+  <main class="practice-detail" data-language-source={page.slug} transition:name="page-content">
+    <section class="detail-hero section-shell">
+      <div class="detail-heading">
+        <p class="eyebrow" data-copy="label">{details.label}</p>
+        <h1 data-copy="title">{details.title}</h1>
+      </div>
+      <div class="detail-image">
+        <Image src={image} alt={page.alt} widths={[640, 960, 1200]} sizes="(min-width: 700px) 45vw, 100vw" loading="eager" fetchpriority="high" />
+      </div>
+      <p class="detail-intro" data-copy="intro">{details.intro}</p>
+    </section>
+
+    <section class="detail-process section-shell" aria-labelledby="process-title">
+      <p class="eyebrow">01</p>
+      <div>
+        <h2 id="process-title" data-copy="processTitle">{details.processTitle}</h2>
+        <p data-copy="process">{details.process}</p>
+      </div>
+    </section>
+
+    <section class="detail-gallery" aria-labelledby="gallery-title">
+      <div class="section-shell">
+        <div class="detail-gallery-heading">
+          <p class="eyebrow">02</p>
+          <h2 id="gallery-title" data-copy="galleryTitle">{details.galleryTitle}</h2>
+        </div>
+        <div class="gallery-placeholders" aria-label="Gallery placeholders">
+          <div><span>01</span></div>
+          <div><span>02</span></div>
+          <div><span>03</span></div>
+        </div>
+        <p class="gallery-note" data-copy="galleryNote">{details.galleryNote}</p>
+      </div>
+    </section>
+
+    <section class="detail-contact section-shell">
+      <p class="eyebrow">03</p>
+      <h2 data-copy="cta">{details.cta}</h2>
+      <a class="button button-dark" href={`tel:${phone}`}><span>{phoneDisplay}</span><span aria-hidden="true">&#8599;</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <span>&copy; {new Date().getFullYear()} Irine Chutketashvili</span>
+    <span data-copy="location">თბილისი, საქართველო</span>
+  </footer>
+
+  <script define:vars={{ page }}>
+    document.addEventListener('astro:page-load', () => {
+    if (document.querySelector('[data-language-source]')?.getAttribute('data-language-source') !== page.slug) return;
+    const languageButtons = document.querySelectorAll('[data-language]');
+    const localized = document.querySelectorAll('[data-copy]');
+    const backCopy = { ka: 'მთავარი', en: 'Home' };
+    const locationCopy = { ka: 'თბილისი, საქართველო', en: 'Tbilisi, Georgia' };
+
+    function setLanguage(language) {
+      const strings = page[language];
+      document.documentElement.lang = language;
+      localized.forEach((element) => {
+        const key = element.dataset.copy;
+        if (key === 'back') element.textContent = backCopy[language];
+        else if (key === 'location') element.textContent = locationCopy[language];
+        else if (key && strings[key]) element.textContent = strings[key];
+      });
+      languageButtons.forEach((button) => {
+        const active = button.dataset.language === language;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      localStorage.setItem('irine-language', language);
+    }
+
+    languageButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.language)));
+    if (localStorage.getItem('irine-language') === 'en') setLanguage('en');
+    });
+  </script>
+</BaseLayout>

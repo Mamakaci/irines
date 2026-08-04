@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { ArrowDown, ArrowUpRight, Menu, X } from 'lucide-astro';
+import { facebookUrl, instagramUrl, phone, phoneDisplay, practicePages, translations } from '../data/content';
+import { artworkImages, heroImage } from '../assets/images';
+
+const work = [
+  {
+    key: 'iconPainting',
+    className: 'has-image',
+    image: artworkImages.iconPainting,
+    alt: 'Painted Georgian icon of Saint George'
+  },
+  {
+    key: 'iconRestoration',
+    className: 'has-image',
+    image: artworkImages.iconRestoration,
+    alt: 'Before and after icon restoration'
+  },
+  {
+    key: 'murals',
+    className: 'has-image',
+    image: artworkImages.murals,
+    alt: 'Custom hand-painted decorative boards on a wooden surface'
+  },
+  {
+    key: 'commissions',
+    className: 'has-image',
+    image: artworkImages.commissions,
+    alt: 'Single painted artwork on a decorative board'
+  }
+] as const;
+
+const practiceLinks = Object.fromEntries(practicePages.map((page) => [page.key, `/practice/${page.slug}`]));
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Irine Chutketashvili home">
+      <span lang="ka">ირინე ჩუტკერაშვილი</span>
+      <span class="wordmark-latin">Irine Chutketashvili</span>
+    </a>
+    <div class="header-actions">
+      <div class="language-switcher" aria-label="Language">
+        <button class="language-button is-active" type="button" data-language="ka" aria-pressed="true">ქარ</button>
+        <span aria-hidden="true">/</span>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="menu-label" data-i18n="menu">მენიუ</span>
+        <Menu class="interface-icon menu-icon" size={19} strokeWidth={1.5} aria-hidden="true" />
+      </button>
+    </div>
+  </header>
+
+  <dialog class="menu-dialog" id="site-menu" aria-label="Site navigation">
+    <div class="menu-dialog-inner">
+      <button class="menu-close" type="button" aria-label="Close navigation"><X class="interface-icon" size={18} strokeWidth={1.5} aria-hidden="true" /></button>
+      <nav class="menu-navigation" aria-label="Main navigation">
+        <a href="#work" data-i18n="navWork">ნამუშევრები</a>
+        <a href="#practice" data-i18n="navServices">მიმართულებები</a>
+        <a href="#contact" data-i18n="navContact">კონტაქტი</a>
+      </nav>
+      <div class="menu-contact">
+        <a href={`tel:${phone}`}>{phoneDisplay}</a>
+        <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+        <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </div>
+  </dialog>
+
+  <main id="top" data-language-source="home" transition:name="page-content">
+    <section class="hero section-shell">
+      <div class="hero-info">
+        <p class="eyebrow" data-i18n="location">თბილისი, საქართველო</p>
+        <h1>
+          <span lang="ka">ირინე ჩუტკერაშვილი</span>
+          <span>Irine Chutketashvili</span>
+        </h1>
+      </div>
+      <div class="hero-art">
+        <Image
+          src={heroImage}
+          alt="Irine Chutketashvili during an interview in an exhibition space"
+          widths={[640, 960, 1440, 1800]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero-bottom">
+        <p class="hero-discipline" data-i18n="discipline">ხატწერა, რესტავრაცია, ფრესკა და ინდივიდუალური შეკვეთები</p>
+        <p class="hero-lead" data-i18n="heroLead">მხატვარი, რომლის ნამუშევარიც ეხმიანება სივრცეს, ტრადიციას და მის მფლობელს.</p>
+        <div class="hero-links">
+          <a class="text-link" href="#work" data-i18n="scroll">ნამუშევრების დათვალიერება</a>
+          <ArrowDown class="interface-icon line-arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+
+    <section class="work section-shell" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01</p>
+          <h2 id="work-title" data-i18n="selected">არჩეული ნამუშევრები</h2>
+        </div>
+        <p data-i18n="selectedNote">პორტფოლიოს სურათები დაემატება უახლოეს პერიოდში.</p>
+      </div>
+      <div class="work-grid">
+        {work.map((item, index) => (
+          <a
+            class={`work-card ${item.className}`}
+            href={practiceLinks[item.key]}
+            aria-label={translations.en[item.key]}
+            style={`--card-index: ${index}`}
+          >
+            <div class="placeholder-art">
+              {item.image ? (
+                <Image src={item.image} alt={item.alt} widths={[320, 640, 900]} sizes="(min-width: 700px) 25vw, 50vw" loading="lazy" />
+              ) : null}
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="work-card-caption">
+              <h3 data-i18n={item.key}>{translations.ka[item.key]}</h3>
+              <ArrowUpRight class="interface-icon work-card-arrow" size={15} strokeWidth={1.5} aria-hidden="true" />
+              {!item.image ? <span data-i18n="workInProgress">ფოტო მალე</span> : null}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="practice section-shell" id="practice" aria-labelledby="practice-title">
+      <div class="section-heading practice-heading">
+        <div>
+          <p class="eyebrow">02</p>
+          <h2 id="practice-title" data-i18n="navServices">მიმართულებები</h2>
+        </div>
+      </div>
+      <div class="practice-list">
+        {work.map((item, index) => (
+          <a class="practice-item" href={practiceLinks[item.key]}>
+            <span class="practice-number">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 data-i18n={item.key}>{translations.ka[item.key]}</h3>
+              <p data-i18n={`${item.key}Desc`}>{translations.ka[`${item.key}Desc`]}</p>
+            </div>
+            <ArrowUpRight class="interface-icon practice-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="about section-shell" aria-labelledby="about-title">
+      <div class="about-rule"></div>
+      <div class="about-content">
+        <div>
+          <p class="eyebrow">03</p>
+          <h2 id="about-title" data-i18n="aboutTitle">მხატვრის შესახებ</h2>
+        </div>
+        <div>
+          <p class="about-text" data-i18n="aboutText">ირინე ჩუტკერაშვილი არის თბილისში მოღვაწე მხატვარი. მისი პრაქტიკა აერთიანებს ხატწერას, ხატების რესტავრაციას, კედლის მხატვრობასა და ინდივიდუალურ შეკვეთებს.</p>
+          <p class="about-note" data-i18n="aboutNote">ვრცელი ბიოგრაფია დაემატება მალე.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="commission-band" aria-labelledby="commission-title">
+      <div class="section-shell commission-content">
+        <p class="eyebrow">04</p>
+        <h2 id="commission-title" data-i18n="commissionTitle">შეკვეთილი ნამუშევრები</h2>
+        <p data-i18n="commissionText">იდეიდან დასრულებულ ნამუშევრამდე: კერძო, რელიგიური და კომერციული სივრცეებისთვის.</p>
+        <ul class="commission-list">
+          <li data-i18n="commissionPrivate">კერძო სივრცეები</li>
+          <li data-i18n="commissionReligious">რელიგიური სივრცეები</li>
+          <li data-i18n="commissionCommercial">კომერციული სივრცეები</li>
+        </ul>
+        <a class="button button-light" href={`tel:${phone}`} data-i18n="commission">შეკვეთის განხილვა</a>
+      </div>
+    </section>
+
+    <section class="contact section-shell" id="contact" aria-labelledby="contact-title">
+      <div class="contact-top">
+        <div>
+          <p class="eyebrow">05</p>
+          <h2 id="contact-title" data-i18n="contactTitle">დავიწყოთ საუბარი</h2>
+        </div>
+        <p data-i18n="contactText">შეკითხვისთვის, თანამშრომლობისთვის ან შეკვეთის განსახილველად, დამიკავშირდით პირდაპირ.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="button button-dark" href={`tel:${phone}`}><span data-i18n="call">დარეკვა</span><span aria-hidden="true">&#8599;</span></a>
+        <a class="button button-outline" href={facebookUrl} target="_blank" rel="noreferrer"><span data-i18n="facebook">Facebook-ზე მიწერა</span><span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <div class="contact-details">
+        <a class="telephone" href={`tel:${phone}`}>{phoneDisplay}</a>
+        <span class="email-placeholder" data-i18n="emailSoon">ელფოსტა მალე დაემატება</span>
+        <div class="socials">
+          <span data-i18n="findMe">სოციალური ქსელები</span>
+          <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+          <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <span>&copy; {new Date().getFullYear()} Irine Chutketashvili</span>
+    <span data-i18n="footer">თბილისი, საქართველო</span>
+  </footer>
+
+  <script define:vars={{ translations }}>
+    document.addEventListener('astro:page-load', () => {
+    if (document.querySelector('[data-language-source]')?.getAttribute('data-language-source') !== 'home') return;
+    const languageButtons = document.querySelectorAll('[data-language]');
+    const translatable = document.querySelectorAll('[data-i18n]');
+    const html = document.documentElement;
+
+    function setLanguage(language) {
+      const strings = translations[language];
+      html.lang = language;
+      translatable.forEach((element) => {
+        const key = element.dataset.i18n;
+        if (key && strings[key]) element.textContent = strings[key];
+      });
+      languageButtons.forEach((button) => {
+        const active = button.dataset.language === language;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      localStorage.setItem('irine-language', language);
+    }
+
+    languageButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.language)));
+    const savedLanguage = localStorage.getItem('irine-language');
+    if (savedLanguage === 'en') setLanguage('en');
+
+    const revealTargets = document.querySelectorAll('.work-card, .practice-item, .about-content, .commission-content, .contact-top');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+      revealTargets.forEach((target) => revealObserver.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add('is-visible'));
+    }
+
+    const dialog = document.querySelector('#site-menu');
+    const menuButton = document.querySelector('.menu-button');
+    const closeButton = document.querySelector('.menu-close');
+    const menuLinks = document.querySelectorAll('.menu-navigation a');
+
+    function closeMenu() {
+      dialog.close();
+      menuButton.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
+
+    menuButton.addEventListener('click', () => {
+      dialog.showModal();
+      menuButton.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    });
+    closeButton.addEventListener('click', closeMenu);
+    menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) closeMenu();
+    });
+    });
+  </script>
+</BaseLayout>

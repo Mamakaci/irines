@@ -1,0 +1,8 @@
+.astro/
+dist/
+node_modules/
+.pnpm-store/
+.dev-output.log
+.dev-error.log
+.install-output.log
+.install-error.log
