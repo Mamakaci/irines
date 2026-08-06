@@ -309,9 +309,10 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
   .practice-item { grid-template-columns: 16.7% minmax(0, 1fr) 26px; padding: 27px; }
   .practice-item > div { display: grid; grid-template-columns: 1fr 1fr; align-items: baseline; gap: 30px; }
   .practice-item p { margin: 0; }
-  .detail-hero { padding-top: 60px; padding-bottom: 112px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 8%; align-items: end; }
-  .detail-heading { grid-column: 1 / -1; }
-  .detail-image { height: min(52vw, 650px); margin: 0; }
+  .detail-hero { padding-top: 60px; padding-bottom: 112px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 8%; align-items: start; }
+  .detail-heading { grid-column: 1 / -1; align-self: start; }
+  .detail-image { height: min(52vw, 650px); margin: 0; background: transparent; }
+  .detail-image img { background: transparent; }
   .detail-intro { margin: 0; }
   .detail-process { grid-template-columns: 1fr 2fr; gap: 30px; padding-top: 90px; padding-bottom: 90px; }
   .detail-gallery { padding: 94px 0 102px; }
