@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import { ArrowDown, ArrowUpRight, Facebook, Instagram, Menu, MessageCircle, Phone, X } from 'lucide-astro';
-import { facebookUrl, instagramUrl, phone, phoneDisplay, practicePages, translations } from '../data/content';
+import { ArrowDown, ArrowUpRight, Facebook, Instagram, Mail, Menu, MessageCircle, Phone, X } from 'lucide-astro';
+import { email, facebookUrl, instagramUrl, phone, phoneDisplay, practicePages, translations, whatsappUrl } from '../data/content';
 import { artworkImages, heroImage } from '../assets/images';
 
 const work = [
@@ -63,6 +63,7 @@ const practiceLinks = Object.fromEntries(practicePages.map((page) => [page.key, 
         <a href="#contact" data-i18n="navContact">კონტაქტი</a>
       </nav>
       <div class="menu-contact">
+        <a href={`mailto:${email}`}>{email}</a>
         <a href={`tel:${phone}`}>{phoneDisplay}</a>
         <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
         <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
@@ -189,7 +190,23 @@ const practiceLinks = Object.fromEntries(practicePages.map((page) => [page.key, 
         <p data-i18n="contactText">შეკითხვისთვის, თანამშრომლობისთვის ან შეკვეთის განსახილველად, დამიკავშირდით პირდაპირ.</p>
       </div>
       <div class="contact-actions">
-        <a class="contact-card contact-card-primary" href={`tel:${phone}`}>
+        <a class="contact-card contact-card-primary" href={`mailto:${email}`}>
+          <span class="contact-card-icon"><Mail class="interface-icon" size={19} strokeWidth={1.5} aria-hidden="true" /></span>
+          <span>
+            <span class="contact-card-label" data-i18n="email">ელფოსტა</span>
+            <span class="contact-card-value">{email}</span>
+          </span>
+          <ArrowUpRight class="interface-icon contact-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
+        </a>
+        <a class="contact-card contact-card-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
+          <span class="contact-card-icon"><MessageCircle class="interface-icon" size={19} strokeWidth={1.5} aria-hidden="true" /></span>
+          <span>
+            <span class="contact-card-label" data-i18n="whatsapp">WhatsApp-ზე მიწერა</span>
+            <span class="contact-card-value">WhatsApp</span>
+          </span>
+          <ArrowUpRight class="interface-icon contact-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
+        </a>
+        <a class="contact-card" href={`tel:${phone}`}>
           <span class="contact-card-icon"><Phone class="interface-icon" size={19} strokeWidth={1.5} aria-hidden="true" /></span>
           <span>
             <span class="contact-card-label" data-i18n="call">დარეკვა</span>
@@ -197,19 +214,9 @@ const practiceLinks = Object.fromEntries(practicePages.map((page) => [page.key, 
           </span>
           <ArrowUpRight class="interface-icon contact-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
         </a>
-        <a class="contact-card" href={facebookUrl} target="_blank" rel="noreferrer">
-          <span class="contact-card-icon"><MessageCircle class="interface-icon" size={19} strokeWidth={1.5} aria-hidden="true" /></span>
-          <span>
-            <span class="contact-card-label" data-i18n="facebook">Facebook-ზე მიწერა</span>
-            <span class="contact-card-value">Facebook</span>
-          </span>
-          <ArrowUpRight class="interface-icon contact-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
-        </a>
       </div>
       <div class="contact-details">
-        <div class="contact-note">
-          <span class="email-placeholder" data-i18n="emailSoon">ელფოსტა მალე დაემატება</span>
-        </div>
+        <p class="contact-note">ირინე ჩუტკერაშვილი</p>
         <div class="socials">
           <span data-i18n="findMe">სოციალური ქსელები</span>
           <a href={facebookUrl} target="_blank" rel="noreferrer"><Facebook class="interface-icon" size={14} strokeWidth={1.5} aria-hidden="true" />Facebook</a>

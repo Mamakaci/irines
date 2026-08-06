@@ -11,6 +11,8 @@ export const translations = {
     discipline: 'ხატწერა, რესტავრაცია, ფრესკა და ინდივიდუალური შეკვეთები',
     heroLead: 'მხატვარი, რომლის ნამუშევარიც ეხმიანება სივრცეს, ტრადიციას და მის მფლობელს.',
     call: 'დარეკვა',
+    email: 'ელფოსტა',
+    whatsapp: 'WhatsApp-ზე მიწერა',
     facebook: 'Facebook-ზე მიწერა',
     commission: 'შეკვეთის განხილვა',
     scroll: 'ნამუშევრების დათვალიერება',
@@ -35,7 +37,6 @@ export const translations = {
     commissionCommercial: 'კომერციული სივრცეები',
     contactTitle: 'დავიწყოთ საუბარი',
     contactText: 'შეკითხვისთვის, თანამშრომლობისთვის ან შეკვეთის განსახილველად, დამიკავშირდით პირდაპირ.',
-    emailSoon: 'ელფოსტა მალე დაემატება',
     findMe: 'სოციალური ქსელები',
     footer: 'თბილისი, საქართველო'
   },
@@ -49,6 +50,8 @@ export const translations = {
     discipline: 'Icon painting, restoration, murals, and commissioned work',
     heroLead: 'An artist whose work responds to place, tradition, and the people who live with it.',
     call: 'Call',
+    email: 'Email',
+    whatsapp: 'Message on WhatsApp',
     facebook: 'Message on Facebook',
     commission: 'Discuss a commission',
     scroll: 'Explore the work',
@@ -73,7 +76,6 @@ export const translations = {
     commissionCommercial: 'Commercial spaces',
     contactTitle: 'Start a Conversation',
     contactText: 'For an enquiry, collaboration, or commission, get in touch directly.',
-    emailSoon: 'Email will be added soon',
     findMe: 'Find Irine online',
     footer: 'Tbilisi, Georgia'
   }
@@ -81,6 +83,8 @@ export const translations = {
 
 export const phone = '+995579579779';
 export const phoneDisplay = '+995 579 57 97 79';
+export const email = 'irinachutkera@gmail.com';
+export const whatsappUrl = 'https://wa.me/995579579779';
 export const facebookUrl = 'https://www.facebook.com/irine.chutkerashvili';
 export const instagramUrl = 'https://www.instagram.com/iriar_tt/';
 
