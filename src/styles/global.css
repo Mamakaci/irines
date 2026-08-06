@@ -150,9 +150,9 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
 .placeholder-art { aspect-ratio: 0.72; position: relative; overflow: hidden; }
 .placeholder-art::before, .placeholder-art::after { content: ''; position: absolute; }
 .placeholder-art span { position: absolute; z-index: 2; top: 12px; left: 12px; color: white; font: 10px var(--mono); transition: transform .25s ease, color .25s ease; }
-.placeholder-art img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center; transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .35s ease; }
-.has-image .placeholder-art { background: #2c3d37; }
-.has-image .placeholder-art::before { inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(26,29,25,.34), transparent 34%, rgba(26,29,25,.24)); opacity: .88; pointer-events: none; transition: opacity .3s ease; }
+.placeholder-art img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center; transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .35s ease; background: transparent; }
+.has-image .placeholder-art { background: transparent !important; }
+.has-image .placeholder-art::before { display: none !important; }
 .has-image .placeholder-art::after { display: none; }
 .placeholder-icon .placeholder-art { background: #546a5c; }
 .placeholder-icon .placeholder-art::before { width: 48%; height: 70%; top: 14%; left: 26%; border: 1px solid rgba(255,255,255,.65); background: linear-gradient(90deg, rgba(183,149,81,.75), transparent); }
