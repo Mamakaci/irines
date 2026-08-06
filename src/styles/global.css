@@ -234,7 +234,6 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
 .button-outline:hover, .button-outline:focus-visible { background: var(--ink); color: white; }
 
 .contact { position: relative; isolation: isolate; padding-top: 110px; padding-bottom: 110px; }
-.contact::before { content: ''; position: absolute; top: 54px; bottom: 42px; left: 0; right: 0; z-index: -1; border-top: 1px solid rgba(49,88,77,.12); border-bottom: 1px solid rgba(49,88,77,.12); background: linear-gradient(135deg, rgba(68,113,97,.06), rgba(255,255,255,.36) 48%, rgba(191,148,72,.10)); box-shadow: 0 12px 44px rgba(49,88,77,.06); pointer-events: none; }
 .contact-top { display: grid; gap: 22px; padding-bottom: 30px; }
 .contact-top > p { max-width: 430px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
 .contact-actions { display: grid; gap: 10px; margin: 8px 0 22px; }
@@ -320,7 +319,7 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
   .detail-contact { padding-top: 105px; padding-bottom: 110px; }
   .about-content { grid-template-columns: 1fr 2fr; gap: 30px; }
   .commission-content { padding-top: 110px; padding-bottom: 110px; }
-  .contact::before { top: 78px; bottom: 58px; left: 40px; right: 40px; }
+  /* contact glass removed */
   .contact-top { grid-template-columns: 1fr 1fr; align-items: end; padding-bottom: 44px; }
   .contact-top > p { justify-self: end; max-width: 420px; }
   .contact-actions { grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 28px; }
