@@ -130,7 +130,7 @@ h1 { max-width: 950px; margin: 15px 0 0; font-size: clamp(31px, 7.8vw, 94px); li
 h1 span { display: block; }
 h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-weight: 400; color: var(--green); }
 .hero-art { min-height: 290px; height: 100%; position: relative; overflow: hidden; background: #2c3d37; isolation: isolate; }
-.hero-art img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 45% 50%; }
+.hero-art img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 45%; }
 .hero-art::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(244,241,234,.35); box-shadow: inset 0 0 0 12px rgba(244,241,234,.04); pointer-events: none; }
 .hero-bottom { display: grid; gap: 19px; padding: 18px; border: 1px solid rgba(255,255,255,.42); border-radius: 8px; background: rgba(255,255,255,.32); box-shadow: 0 12px 34px rgba(36,46,37,.06); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .hero-discipline { margin: 0; color: var(--green); font-size: 14px; line-height: 1.35; }
@@ -150,7 +150,7 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
 .placeholder-art { aspect-ratio: 0.72; position: relative; overflow: hidden; }
 .placeholder-art::before, .placeholder-art::after { content: ''; position: absolute; }
 .placeholder-art span { position: absolute; z-index: 2; top: 12px; left: 12px; color: white; font: 10px var(--mono); transition: transform .25s ease, color .25s ease; }
-.placeholder-art img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .35s ease; }
+.placeholder-art img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center; transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .35s ease; }
 .has-image .placeholder-art { background: #2c3d37; }
 .has-image .placeholder-art::before { inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(26,29,25,.34), transparent 34%, rgba(26,29,25,.24)); opacity: .88; pointer-events: none; transition: opacity .3s ease; }
 .has-image .placeholder-art::after { display: none; }
@@ -269,7 +269,7 @@ h1 span:last-child { margin-top: 5px; font-family: 'Manrope', var(--sans); font-
 .detail-hero { padding-top: 42px; padding-bottom: 80px; }
 .detail-heading h1 { margin-top: 11px; max-width: 780px; }
 .detail-image { height: min(83vw, 680px); margin-top: 38px; overflow: hidden; background: var(--green-deep); box-shadow: 0 24px 70px rgba(26,29,25,.14); }
-.detail-image img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; transition: transform .65s cubic-bezier(.2, .8, .2, 1), filter .35s ease; }
+.detail-image img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center; transition: transform .65s cubic-bezier(.2, .8, .2, 1), filter .35s ease; }
 .detail-image:hover img { transform: scale(1.035); filter: saturate(1.06); }
 .detail-intro { max-width: 620px; margin: 25px 0 0; font-size: clamp(21px, 4.5vw, 37px); line-height: 1.28; }
 .detail-process { padding-top: 62px; padding-bottom: 62px; display: grid; gap: 18px; border-top: 1px solid var(--line); }
